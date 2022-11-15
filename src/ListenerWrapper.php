@@ -59,19 +59,22 @@ class ListenerWrapper
      */
     public function getListener(): callable
     {
-        $this->resolve();
-        return $this->listener;
+        return $this->resolve();
     }
 
     /**
-     * @return void
+     * @return callable
      * @throws NotFoundExceptionInterface
      * @throws ContainerExceptionInterface
      */
-    private function resolve(): void
+    private function resolve(): callable
     {
         if (!is_callable($this->listener)) {
-            $this->listener = $this->container->get($this->listener);
+            /** @var callable $listener */
+            $listener = $this->container->get($this->listener);
+            $this->listener = $listener;
         }
+
+        return $this->listener;
     }
 }

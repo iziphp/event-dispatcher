@@ -35,6 +35,7 @@ class EventDispatcher implements EventDispatcherInterface
         foreach ($listeners as $listener) {
             $listener($event);
 
+            /** @var StoppableEventInterface $event */
             if ($isStoppable && $event->isPropagationStopped()) {
                 break;
             }
