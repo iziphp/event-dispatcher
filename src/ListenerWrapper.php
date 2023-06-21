@@ -23,17 +23,10 @@ class ListenerWrapper
     /** @var string|callable $listener */
     private $listener;
 
-    /**
-     * @param ContainerInterface $container
-     * @param string|callable $listener
-     * @param int $priority
-     * @return void
-     * @throws InvalidArgumentException
-     */
     public function __construct(
         private ContainerInterface $container,
         string|callable $listener,
-        private int $priority,
+        private Priority $priority,
     ) {
         if (!is_callable($listener) && !method_exists($listener, "__invoke")) {
             throw new InvalidArgumentException("Listener must be a callable or a class with __invoke method");
@@ -42,12 +35,7 @@ class ListenerWrapper
         $this->listener = $listener;
     }
 
-    /**
-     * Get listener priority
-     *
-     * @return int
-     */
-    public function getPriority(): int
+    public function getPriority(): Priority
     {
         return $this->priority;
     }

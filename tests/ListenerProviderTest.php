@@ -7,6 +7,7 @@ namespace PhpStandard\EventDispatcher\Tests;
 use PhpStandard\Container\Configurator;
 use PhpStandard\Container\Container;
 use PhpStandard\EventDispatcher\ListenerProvider;
+use PhpStandard\EventDispatcher\Priority;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -32,18 +33,18 @@ class ListenerProviderTest extends TestCase
                 MockEvent::class,
                 function () {
                 },
-                ListenerProvider::PRIORITY_LOW
+                Priority::LOW
             )
             ->addEventListener('SomeOtherEvent', $listener)
             ->addEventListener(
                 MockEvent::class,
                 'strlen',
-                ListenerProvider::PRIORITY_HIGH
+                Priority::HIGH
             )
             ->addEventListener(
                 MockEvent::class,
                 $listener,
-                ListenerProvider::PRIORITY_NORMAL
+                Priority::NORMAL
             );
 
         $this->assertSame(
