@@ -5,6 +5,7 @@ namespace PhpStandard\EventDispatcher\Attributes;
 use Attribute;
 use PhpStandard\EventDispatcher\Priority;
 
+/** @package PhpStandard\EventDispatcher\Attributes */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class Subscribe
 {
