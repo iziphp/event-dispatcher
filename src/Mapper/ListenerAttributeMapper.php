@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpStandard\EventDispatcher\Mapper;
 
 use PhpStandard\EventDispatcher\Attributes\Subscribe;
@@ -14,27 +16,52 @@ use RecursiveIteratorIterator;
 use ReflectionClass;
 use SplFileInfo;
 
-/** @package PhpStandard\EventDispatcher\Mapper */
+/**
+ * Maps events to listeners based on attributes defined on the listener class.
+ *
+ * @package PhpStandard\EventDispatcher\Mapper
+ */
 class ListenerAttributeMapper implements EventMapperInterface
 {
-    /** @var array<string> $paths */
+    /**
+     * An array of paths to lookup for listener classes.
+     *
+     * @var array<string> $paths
+     */
     private array $paths = [];
+
+    /**
+     * Indicates whether or not caching is enabled.
+     *
+     * @var bool $isCachingEnabled
+     */
     private bool $isCachingEnabled = false;
 
     /**
+     * The resolved subscribers found during lookup.
+     *
      * @var array<array{
      *  eventType: class-string,
      *  listener: string|callable,
      *  priority: Priority
-     * }> The subscribers found during lookup.
+     * }> $subscribers
      */
     private array $subscribers = [];
+
+    /**
+     * Indicates whether or not subscribers have been resolved.
+     *
+     * @var bool $isSubsResolved
+     */
     private bool $isSubsResolved = false;
 
     /**
+     * Constructs a new ListenerAttributeMapper instance.
+     *
      * @param ContainerInterface $container
+     * The container object used for resolving dependencies.
      * @param null|CacheItemPoolInterface $cache
-     * @return void
+     * The cache object used for caching subscribers.
      */
     public function __construct(
         private ContainerInterface $container,
@@ -42,7 +69,12 @@ class ListenerAttributeMapper implements EventMapperInterface
     ) {
     }
 
-    /** @inheritDoc */
+    /**
+     * Returns an iterable collection of ListenerWrappers for a given event
+     * object.
+     *
+     * @inheritDoc
+     */
     public function getListenersForEvent(object $event): iterable
     {
         if (!$this->isSubsResolved) {
@@ -58,21 +90,32 @@ class ListenerAttributeMapper implements EventMapperInterface
         }
     }
 
-    /** @return void */
+    /**
+     * Enables caching.
+     *
+     * @return void
+     */
     public function enableCaching(): void
     {
         $this->isCachingEnabled = true;
     }
 
-    /** @return void */
+    /**
+     * Disables caching.
+     *
+     * @return void
+     */
     public function disableCaching(): void
     {
         $this->isCachingEnabled = false;
     }
 
     /**
-     * @param string $path
-     * @return ListenerAttributeMapper
+     * Adds a path to lookup for listener classes.
+     *
+     * @param string $path The path to add.
+     *
+     * @return ListenerAttributeMapper This instance, for chaining.
      */
     public function addPath(string $path): self
     {
@@ -81,8 +124,12 @@ class ListenerAttributeMapper implements EventMapperInterface
     }
 
     /**
+     * Looks up subscribers and caches them if caching is enabled.
+     *
      * @return void
+     *
      * @throws InvalidArgumentException
+     * If there's an invalid argument provided in the cache item.
      */
     private function lookupForSubscribers(): void
     {
@@ -109,7 +156,10 @@ class ListenerAttributeMapper implements EventMapperInterface
     }
 
     /**
-     * @param string $path
+     * Looks up subscribers in a path.
+     *
+     * @param string $path The path to lookup for subscribers.
+     *
      * @return void
      */
     private function lookupForSubscribersInPath(string $path): void
@@ -144,7 +194,11 @@ class ListenerAttributeMapper implements EventMapperInterface
     }
 
     /**
-     * @param SplFileInfo $file
+     * Looks up subscribers in a file.
+     *
+     * @param ReflectionClass<object> $reflection
+     * A ReflectionClass object representing the listener class to process.
+     *
      * @return void
      */
     private function lookupForSubscribersInFile(ReflectionClass $reflection): void

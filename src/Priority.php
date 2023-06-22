@@ -1,14 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpStandard\EventDispatcher;
 
+/**
+ * The priority levels for event listeners.
+ *
+ * @package PhpStandard\EventDispatcher
+ */
 enum Priority: int
 {
     /**
-     * Listener priority values
-     * Listeners with higher priority number will be called first.
+     * Low priority.
      */
     case LOW = 0;
+
+    /**
+     * Normal priority.
+     */
     case NORMAL = 50;
+
+    /**
+     * High priority.
+     */
     case HIGH = 100;
 }

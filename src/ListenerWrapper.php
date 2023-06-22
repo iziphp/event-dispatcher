@@ -9,7 +9,12 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-/** @package PhpStandard\EventDispatcher */
+/**
+ * Wraps a listener to provide additional functionality such as priority and
+ * lazy resolution.
+ *
+ * @package PhpStandard\EventDispatcher
+ */
 class ListenerWrapper
 {
     /**
@@ -20,30 +25,51 @@ class ListenerWrapper
      * @see https://wiki.php.net/rfc/consistent_callables
      */
 
-    /** @var string|callable $listener */
+    /**
+     * @var string|callable $listener
+     * The listener callback or the FQCN of a class implementing __invoke.
+     */
     private $listener;
 
+    /**
+     * ListenerWrapper constructor.
+     *
+     * @param ContainerInterface $container
+     * The container used for resolving the listener (if it's a service).
+     * @param string|callable $listener
+     * The listener callback or the FQCN of a class implementing __invoke.
+     * @param Priority $priority The priority of the listener.
+     * @throws InvalidArgumentException
+     * If the listener is neither callable nor a class with __invoke method.
+     */
     public function __construct(
         private ContainerInterface $container,
         string|callable $listener,
         private Priority $priority,
     ) {
         if (!is_callable($listener) && !method_exists($listener, "__invoke")) {
-            throw new InvalidArgumentException("Listener must be a callable or a class with __invoke method");
+            throw new InvalidArgumentException(
+                "Listener must be a callable or a class with __invoke method"
+            );
         }
 
         $this->listener = $listener;
     }
 
+    /**
+     * Get the priority of the listener.
+     *
+     * @return Priority The priority of the listener.
+     */
     public function getPriority(): Priority
     {
         return $this->priority;
     }
 
     /**
-     * Get listener callback
+     * Get the resolved listener callback.
      *
-     * @return callable
+     * @return callable The resolved listener callback.
      */
     public function getListener(): callable
     {
@@ -51,9 +77,14 @@ class ListenerWrapper
     }
 
     /**
-     * @return callable
+     * Resolve the listener callback if it's a service.
+     *
+     * @return callable The resolved listener callback.
      * @throws NotFoundExceptionInterface
+     * If the listener service is not found in the container.
      * @throws ContainerExceptionInterface
+     * If there is an error while retrieving the listener service from the
+     * container.
      */
     private function resolve(): callable
     {

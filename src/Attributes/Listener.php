@@ -1,22 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpStandard\EventDispatcher\Attributes;
 
 use Attribute;
 use PhpStandard\EventDispatcher\Priority;
 
-/** @package PhpStandard\EventDispatcher\Attributes */
+/**
+ * Marks a class as a listener for an event. This attribute is intended to be
+ * used in event classes.
+ *
+ * Example usage:
+ *
+ * #[Listener(ExampleEventListener::class, Priority::NORMAL)]
+ * class ExampleEvent{}
+ *
+ * @package PhpStandard\EventDispatcher\Attributes
+ */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class Listener
 {
     /**
-     * @param class-string $className FQCN of invokable listener class
+     * Listener constructor.
+     *
+     * @param string $className FQCN of invokable listener class
      * @param Priority $priority
-     * @return void
+     * The priority of the listener (optional, defaults to Priority::NORMAL)
      */
     public function __construct(
         public readonly string $className,
-        public readonly Priority $priority = Priority::NORMAL,
+        public readonly Priority $priority = Priority::NORMAL
     ) {
     }
 }

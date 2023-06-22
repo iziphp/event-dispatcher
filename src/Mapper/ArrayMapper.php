@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhpStandard\EventDispatcher\Mapper;
 
 use PhpStandard\EventDispatcher\EventMapperInterface;
@@ -7,43 +9,59 @@ use PhpStandard\EventDispatcher\ListenerWrapper;
 use PhpStandard\EventDispatcher\Priority;
 use Psr\Container\ContainerInterface;
 
+/**
+ * Maps events to listeners using an array.
+ *
+ * @package PhpStandard\EventDispatcher\Mapper
+ */
 class ArrayMapper implements EventMapperInterface
 {
-    /** @var array<class-string,array<ListenerWrapper>>*/
+    /**
+     * An associative array that stores the wrapper classes associated with a
+     * given event type.
+     *
+     * @var array<class-string,array<ListenerWrapper>>
+     */
     private array $wrappers = [];
-    // private array $resolved = [];s
 
+    /**
+     * Constructs a new ArrayMapper instance.
+     *
+     * @param ContainerInterface $container
+     * The container object used for resolving dependencies.
+     */
     public function __construct(
         private ContainerInterface $container
     ) {
     }
 
-    /** @inheritDoc */
+    /**
+     * Returns an iterable collection of ListenerWrappers for a given event
+     * object.
+     *
+     * @inheritDoc
+     */
     public function getListenersForEvent(object $event): iterable
     {
-        // if (!array_key_exists($event::class, $this->resolved)) {
-        // $allWrappers = [];
         foreach ($this->wrappers as $eventType => $wrappers) {
             if (!$event instanceof $eventType) {
                 continue;
             }
 
             yield from $wrappers;
-
-            // $allWrappers = array_merge($allWrappers, $wrappers);
         }
-
-        // $this->resolved[$event::class] = $allWrappers;
-        // }
-
-        // yield from $this->resolved[$event::class];
     }
 
     /**
+     * Adds a listener to the mapper.
+     *
      * @param class-string $eventType
+     * The name of the event class that the listener is subscribed to.
      * @param string|callable $listener
-     * @param Priority $priority
-     * @return ArrayMapper
+     * The name of the method or callback function that will be called when the
+     * event is dispatched.
+     * @param Priority $priority The priority level assigned to the listener.
+     * @return ArrayMapper Returns this ArrayMapper instance.
      */
     public function addEventListener(
         string $eventType,

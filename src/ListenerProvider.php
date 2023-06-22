@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace PhpStandard\EventDispatcher;
 
-use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
-/** @package PhpStandard\EventDispatcher */
+/**
+ * A listener provider that maps event objects to their corresponding listeners.
+ *
+ * @package PhpStandard\EventDispatcher
+ */
 class ListenerProvider implements ListenerProviderInterface
 {
-    /** @var EventMapperInterface[] */
+    /** @var EventMapperInterface[] An array of event mappers. */
     private array $mappers = [];
 
-    /** @var array<class-string,ListenerWrapper[]> */
+    /**
+     * @var array<class-string,ListenerWrapper[]>
+     * An array of resolved listener wrappers for each event type.
+     */
     private array $resolved = [];
 
     /**
      * @inheritDoc
-     * @return iterable<callable>
      */
     public function getListenersForEvent(object $event): iterable
     {
@@ -26,8 +31,10 @@ class ListenerProvider implements ListenerProviderInterface
     }
 
     /**
-     * @param EventMapperInterface $mapper
-     * @return ListenerProvider
+     * Add an event mapper to the listener provider.
+     *
+     * @param EventMapperInterface $mapper The event mapper to add.
+     * @return ListenerProvider The current listener provider instance.
      */
     public function addMapper(EventMapperInterface $mapper): self
     {
@@ -36,11 +43,12 @@ class ListenerProvider implements ListenerProviderInterface
     }
 
     /**
-     * Resolve the listeners for event type and
-     * return resolved listeners iterable
+     * Resolve the listeners for the given event and return an iterable of
+     * resolved listeners.
      *
-     * @param object $event
+     * @param object $event The event object.
      * @return iterable<callable>
+     * An iterable of resolved listeners for the given event.
      */
     private function getResolvedListeners(object $event): iterable
     {
@@ -51,10 +59,11 @@ class ListenerProvider implements ListenerProviderInterface
     }
 
     /**
-     * Get original unresolved listener handles match for the event type
+     * Get the unresolved listener wrappers that match the event type.
      *
-     * @param object $event
+     * @param object $event The event object.
      * @return iterable<ListenerWrapper>
+     * An iterable of unresolved listener wrappers for the given event.
      */
     private function getWrappers(object $event): iterable
     {
@@ -75,10 +84,10 @@ class ListenerProvider implements ListenerProviderInterface
     }
 
     /**
-     * Sort listener wrappers by descending order priority
+     * Sort the listener wrappers in descending order of priority.
      *
-     * @param ListenerWrapper $wrappers
-     * @return ListenerWrapper[]
+     * @param ListenerWrapper $wrappers The listener wrappers to sort.
+     * @return ListenerWrapper[] The sorted array of listener wrappers.
      */
     private function sortWrappers(ListenerWrapper ...$wrappers): array
     {
