@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher;
+namespace Easy\EventDispatcher;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
@@ -10,7 +10,7 @@ use Psr\EventDispatcher\StoppableEventInterface;
 
 /**
  * EventDispatcher class is used to dispatch events.
- * @package PhpStandard\EventDispatcher
+ * @package Easy\EventDispatcher
  */
 class EventDispatcher implements EventDispatcherInterface
 {

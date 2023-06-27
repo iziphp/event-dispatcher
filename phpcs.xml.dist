@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PhpStandard">
-    <description>The coding standard for PhpStandard.</description>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="IziPHP">
+    <description>The coding standard for IziPHP.</description>
 
     <file>src</file>
 
@@ -20,6 +20,6 @@
     <rule ref="PHPCompatibility" />
 
     <!-- Check for cross-version support for PHP 8.1 and higher. -->
-    <config name="testVersion" value="8.1-" />
+    <config name="testVersion" value="8.2-" />
     <config name="installed_paths" value="vendor/phpcompatibility/php-compatibility" />
 </ruleset>

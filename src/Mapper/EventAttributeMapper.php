@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher\Mapper;
+namespace Easy\EventDispatcher\Mapper;
 
-use PhpStandard\EventDispatcher\Attributes\Listener;
-use PhpStandard\EventDispatcher\EventMapperInterface;
-use PhpStandard\EventDispatcher\ListenerWrapper;
+use Easy\EventDispatcher\Attributes\Listener;
+use Easy\EventDispatcher\EventMapperInterface;
+use Easy\EventDispatcher\ListenerWrapper;
 use Psr\Container\ContainerInterface;
 use ReflectionObject;
 
 /**
  * Maps events to listeners based on attributes defined on the event object.
  *
- * @package PhpStandard\EventDispatcher\Mapper
+ * @package Easy\EventDispatcher\Mapper
  */
 class EventAttributeMapper implements EventMapperInterface
 {

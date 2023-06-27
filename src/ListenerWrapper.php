@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher;
+namespace Easy\EventDispatcher;
 
 use InvalidArgumentException;
 use Psr\Container\ContainerExceptionInterface;
@@ -13,7 +13,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * Wraps a listener to provide additional functionality such as priority and
  * lazy resolution.
  *
- * @package PhpStandard\EventDispatcher
+ * @package Easy\EventDispatcher
  */
 class ListenerWrapper
 {

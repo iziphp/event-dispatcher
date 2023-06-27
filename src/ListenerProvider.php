@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher;
+namespace Easy\EventDispatcher;
 
 use Psr\EventDispatcher\ListenerProviderInterface;
 
 /**
  * A listener provider that maps event objects to their corresponding listeners.
  *
- * @package PhpStandard\EventDispatcher
+ * @package Easy\EventDispatcher
  */
 class ListenerProvider implements ListenerProviderInterface
 {

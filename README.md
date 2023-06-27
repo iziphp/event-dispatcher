@@ -1,4 +1,4 @@
-# phpstandard/event-dispatcher
+# iziphp/event-dispatcher
 
 This is a PHP package that implements the PSR-14 standard for event dispatching.
 
@@ -7,7 +7,7 @@ This is a PHP package that implements the PSR-14 standard for event dispatching.
 To install this package, run the following command in your terminal:
 
 ```bash
-composer create-project phpstandard/event-dispatcher
+composer create-project iziphp/event-dispatcher
 ```
 
 This will install the latest version of the package and its dependencies.

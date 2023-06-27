@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // Defines a namespace for the class.
-namespace PhpStandard\EventDispatcher;
+namespace Easy\EventDispatcher;
 
 // Imports the StoppableEventInterface from Psr namespace.
 use Psr\EventDispatcher\StoppableEventInterface;
@@ -12,7 +12,7 @@ use Psr\EventDispatcher\StoppableEventInterface;
  * This is an abstract class called "AbstractStoppableEvent".
  * It implements the StoppableEventInterface and defines two methods.
  *
- * @package PhpStandard\EventDispatcher
+ * @package Easy\EventDispatcher
  */
 abstract class AbstractStoppableEvent implements StoppableEventInterface
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher;
+namespace Easy\EventDispatcher;
 
 /**
  * The priority levels for event listeners.
  *
- * @package PhpStandard\EventDispatcher
+ * @package Easy\EventDispatcher
  */
 enum Priority: int
 {

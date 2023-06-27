@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher\Mapper;
+namespace Easy\EventDispatcher\Mapper;
 
-use PhpStandard\EventDispatcher\EventMapperInterface;
-use PhpStandard\EventDispatcher\ListenerWrapper;
-use PhpStandard\EventDispatcher\Priority;
+use Easy\EventDispatcher\EventMapperInterface;
+use Easy\EventDispatcher\ListenerWrapper;
+use Easy\EventDispatcher\Priority;
 use Psr\Container\ContainerInterface;
 
 /**
  * Maps events to listeners using an array.
  *
- * @package PhpStandard\EventDispatcher\Mapper
+ * @package Easy\EventDispatcher\Mapper
  */
 class ArrayMapper implements EventMapperInterface
 {

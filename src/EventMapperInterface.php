@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher;
+namespace Easy\EventDispatcher;
 
 /**
  * Interface for event mappers that map event objects to listener wrappers.
  *
- * @package PhpStandard\EventDispatcher
+ * @package Easy\EventDispatcher
  */
 interface EventMapperInterface
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher\Mapper;
+namespace Easy\EventDispatcher\Mapper;
 
-use PhpStandard\EventDispatcher\Attributes\Subscribe;
-use PhpStandard\EventDispatcher\EventMapperInterface;
-use PhpStandard\EventDispatcher\ListenerWrapper;
-use PhpStandard\EventDispatcher\Priority; // Used in dosctype
+use Easy\EventDispatcher\Attributes\Subscribe;
+use Easy\EventDispatcher\EventMapperInterface;
+use Easy\EventDispatcher\ListenerWrapper;
+use Easy\EventDispatcher\Priority; // Used in dosctype
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Container\ContainerInterface;
@@ -19,7 +19,7 @@ use SplFileInfo;
 /**
  * Maps events to listeners based on attributes defined on the listener class.
  *
- * @package PhpStandard\EventDispatcher\Mapper
+ * @package Easy\EventDispatcher\Mapper
  */
 class ListenerAttributeMapper implements EventMapperInterface
 {

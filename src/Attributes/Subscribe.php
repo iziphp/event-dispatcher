@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpStandard\EventDispatcher\Attributes;
+namespace Easy\EventDispatcher\Attributes;
 
 use Attribute;
-use PhpStandard\EventDispatcher\Priority;
+use Easy\EventDispatcher\Priority;
 
 /**
  * Marks a class as a subscriber for events. This attribute is intended to be
@@ -16,7 +16,7 @@ use PhpStandard\EventDispatcher\Priority;
  * #[Subscribe(ExampleEvent::class, Priority::NORMAL)]
  * class ExampleEventListener {}
  *
- * @package PhpStandard\EventDispatcher\Attributes
+ * @package Easy\EventDispatcher\Attributes
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class Subscribe
